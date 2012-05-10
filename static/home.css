@@ -1,0 +1,177 @@
+@font-face {
+	font-family: BebasNeue;
+	src: url(graphics/BebasNeue.otf);
+	font-family: CenturyGothic;
+	src: url(graphics/GOTHIC.TTF);
+}
+
+#promptError{
+  visibility:hidden;
+  color:red;
+}
+
+#contentBox{
+	color: #FFFFFF;
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	top: 50px;
+	width: 100%;
+	margin-bottom: 0px;
+	margin-top: auto;
+	bottom: 0px;
+	background-color: #FFCD03;
+	font-family: CenturyGothic;	
+}
+#content {
+	height: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	width: 90%;
+}
+	
+
+#tournaments{
+	background-color: rgba(21,21,21,0.5);
+  position:relative;
+  float:left;
+  width:64.33%;
+  height:100%;
+}
+#tournaments #createLink{
+  text-align:center;
+  width:100%;
+  height:50px;
+  font-size:20px;
+  position:absolute;
+  bottom:0;
+}
+#tournaments #createLink .icon{
+  position:absolute;
+  top:0;
+  left:35%;
+  width:45;
+  height:45;
+  background:url(graphics/plus.png) no-repeat;
+  background-size:45 45;
+}
+#tournamentDivider{
+  width:100%;
+  height:3px;
+}
+
+#contentDivider{
+  float:left;
+  width:0.33%;
+  height:100%;
+}
+#notifications{
+	background-color: rgba(21,21,21,0.5);
+  float:left;
+  width:35.33%;
+  height:100%;
+}
+
+.subheader{
+  height:30px;
+  font-size:30pt;
+  font-family: BebasNeue;
+  color: #FFFFFF;
+  margin-left: 10px;
+}
+.subheader .title{
+  text-align: left;
+}
+#search{
+  float:right;
+  margin:4px;
+  height:80%;
+  width:250px;
+}
+#searchIcon{
+	border: none;
+  float:right;
+  margin:4px;
+  width:25px;
+  height:25px;
+  background:url(graphics/search.png) no-repeat;
+  background-size:25 25;
+}
+
+#yourTournaments{
+	margin-left: 0px;
+	width: 100%;
+	font-family: CenturyGothic;	
+}
+#allTournaments{
+	margin-left: 0px;
+	width: 100%;
+	font-family: CenturyGothic;	
+}
+
+.listing{
+  position:relative;
+  margin-left: auto;
+  margin-right: auto;
+  width:100%;
+  height:90px;
+  margin-top:3px;
+  background-color: rgba(21,21,21,0.1);*/
+}
+.listing:hover {
+	background-color: rgba(255,205,3,0.6);	
+}
+.listingLink{
+  text-decoration:none;
+  color:#FFFFFF;
+}
+.listing .button{
+display: inline;
+  clear:right;
+}
+.listing .title{
+  width: auto;
+  font-weight:bold;
+  text-decoration:underline;
+}
+.closeButton{
+  float:right;
+}
+.icon{
+  float:left;
+  width:75px;
+  height:75px;
+  background-color:white;
+}
+#soccerIcon{
+  background:url(graphics/doubleElim.png) no-repeat;
+  background-size:75px 75px;
+}#chessIcon{
+  background:url(graphics/singleElim.png) no-repeat;
+  background-size:75px 75px;
+}#funfunIcon{
+  background:url(graphics/grid.png) no-repeat;
+  background-size:75px 75px;
+}#roundrobinIcon{
+  background:url(graphics/grid.png) no-repeat;
+  background-size:75px 75px;
+}
+#officeIcon1{
+  background:url(graphics/grid.png) no-repeat;
+  background-size:75px 75px;
+}#officeIcon2{
+  background:url(graphics/grid.png) no-repeat;
+  background-size:75px 75px;
+}#officeIcon3{
+  background:url(graphics/grid.png) no-repeat;
+  background-size:75px 75px;
+}
+
+.buttons {
+float:right;
+}
+
+
+.results{
+  margin:5px;
+}

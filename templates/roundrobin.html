@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}Round Robin{% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href={{url_for('static',filename="tournament.css")}} />
+  <link rel="stylesheet" type="text/css" href={{url_for('static', filename="roundrobin.css")}} />
+  <script type="text/javascript" src={{url_for('static',filename="tournament.js")}}></script>
+  <script type="text/javascript" src={{url_for('static',filename="roundrobin.js")}}></script>
+{% endblock %}
+
+{% block content %}
+    <div id="scorePrompt" title="Enter Outcome">
+      <div id="players">
+        <div class="smallTitle">
+          Players:
+        </div>
+        <div id="you">You</div>
+        vs.
+        <div id="opponent"></div>
+      </div>
+      <div id="outcome">
+        <div class="smallTitle">
+          Winner:
+        </div>
+        <form id="winner">
+          <input type="radio" name="winner" value="you"></input>
+          <br />
+          <br />
+          <input type="radio" name="winner" value="opp"></input>
+        </form>
+      </div>
+      <div id="score">
+        <div class="smallTitle">
+          Score:
+        </div>
+        <input type="text" id="yourScore" class="scoreInput"></input>
+        <br />
+        <br />
+        <input type="text" id="oppScore" class="scoreInput"></input>
+      </div>
+      <div id="scoreError">
+        Please Select a Winner
+      </div>
+    </div>
+	
+	<div id="contentBox">
+    <div id="tournament">
+      <div id="expandBar"><div class="icon"></div></div>
+      <div id="adminbar">
+          <div id="bar" class="expanded">
+            <div id="icon" class="expanded"></div>
+          </div>
+          <div class="title">{{ tournament.name }} Tournament</div>
+		  <br>
+      <div id="description">Description: {{ tournament.description}}</div>
+          <br>
+		  <div id="memberList">
+            Players:
+            <br />
+            <div id="adminList">
+              {% for a in tournament.admins %}
+              <div class="player"><input type="checkbox" name="player" value="{{a}}" />{{a}}</div>
+              {% endfor %}
+            </div>
+            <div id="playerList">
+              {% for p in tournament.players %}
+              <div class="player"><input type="checkbox" name="player" value="{{p}}" />{{p}}</div>
+              {% endfor %}
+            </div>
+            <div id="bootedList">
+              {% for b in tournament.booted %}
+              <div class="player"><input type="checkbox" name="player" value="{{b}}" />{{b}}</div>
+              {% endfor %}
+            </div>
+          </div>
+          <div id="buttons">
+            <button id="makeAdminBtn" type="button">Make Admin</button>
+            <button id="bootBtn" type="button">Boot Player</button>
+          </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

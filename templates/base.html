@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+  {% block head %}
+  <title>BrackeTracker - {% block title %}{% endblock title %}</title>
+  <link rel="stylesheet" type="text/css" href={{url_for('static',filename="main.css")}} />
+	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" media="all" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+  <script type="text/javascript" src={{url_for('static',filename="main.js")}}></script>
+  {% endblock head %}
+	</head>
+
+	<body>
+		<div id="header">
+			<div id="menubar">
+				<div id="leftMenu" >
+					<div id="homeIcon" class="menubarIcon">
+            <a href={{url_for('home')}}><img src={{url_for('static',filename='graphics/home.png')}} /></a>
+					</div>
+					<div id="friendsIcon" class="menubarIcon">
+            <a href={{url_for('friends')}}><img src={{url_for('static',filename="graphics/friends.png")}} /></a>
+					</div>
+				</div>
+				<div id="centerMenu">
+					<div id="logo">
+            <a href={{url_for('home')}}><img src={{url_for('static',filename="graphics/bracketrackerlogosmall.png")}} /></a>
+					</div>
+				</div>
+				<div id="rightMenu" >
+					<div id="profileIcon" class="menubarIcon">
+            <a href={{url_for('profile')}}><img src={{url_for('static',filename="graphics/larryprofile.png")}} /></a>
+					</div>
+					<div id="settingsIcon" class="menubarIcon">
+            <a href={{url_for('settings')}}><img src={{url_for('static',filename="graphics/settings.png")}} /></a>
+					</div>
+					
+					<div id="logoutIcon" class="menubarIcon">
+            <a href={{url_for('home')}}><img src={{url_for('static',filename="graphics/logout.png")}} /></a>
+					</div>
+				</div>
+			</div>
+		</div>
+    
+    {% block content %}
+    {% endblock content %}
+	</body>
+</html>

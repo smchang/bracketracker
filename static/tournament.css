@@ -1,0 +1,123 @@
+@font-face {
+	font-family: BebasNeue;
+	src: url(graphics/BebasNeue.otf);
+	font-family: CenturyGothic;
+	src: url(graphics/GOTHIC.TTF);
+}
+
+body {
+overflow: hidden;
+}
+
+#tournament{
+  position:relative;
+  float:left;
+  width:100%;
+  height:100%;
+  background-color: rgba(21,21,21,0.1);
+}
+
+#contentBox{	
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	top: 50px;
+	width: 100%;
+	margin-bottom: 0px;
+	margin-top: auto;
+	bottom: 0px;
+	background-color: #FFCD03;
+	font-family: CenturyGothic;	
+}
+
+#adminbar{
+  position:relative;
+  height:100%;
+  width: 300px;
+  border:1px solid black;
+  background-color: rgba(21,21,21,0.2);
+}
+.title{
+	font-family: BebasNeue;
+  text-align:center;
+  font-size:30pt;
+}
+#description{
+  margin: 5px;
+}
+
+#memberList{
+  margin:5px;
+}
+.player{
+  width:90%;
+}
+#adminList .player{
+  margin: 5px;
+  background-color: #7EC1FA;
+}
+#bootedList .player{
+  margin: 5px;
+  background-color:#F07778;
+}
+#playerList .player{
+  margin:5px;
+  background-color:#89FBBA;
+}
+
+#expandBar{
+  display:none;
+  float:left;
+  height:100%;
+  width:35px;
+  border:1px solid black;
+}
+#expandBar .icon{
+  position:absolute;
+  top: 50%;
+  width: 35px;
+  height:35px;
+  background: url(graphics/expandIcon.png) no-repeat;
+  background-size:35px 35px;
+}
+#bar{
+  float:right;
+  height:100%;
+  width: 35px;
+}
+#bar #icon{
+  margin: auto;
+  position:absolute;
+  top: 50%;
+  width:35px;
+  height:35px;
+  background-size:35px 35px;
+}
+#bar .expanded{
+  background: url(graphics/unexpandIcon.png) no-repeat;
+}
+#bar .collapsed{
+  background: url(graphics/expandIcon.png) no-repeat;
+}
+#buttons{
+  position:absolute;
+  right:0;
+  bottom:0;
+}
+#makeAdminBtn{
+  float:right;
+  clear:right;
+}
+#bootBtn{
+  float:right;
+  clear:right;
+}
+
+#bracket{
+  position:absolute;
+  top:10px;
+  left:33%;
+  width:800px;
+  height:800px;
+  margin:auto;
+}

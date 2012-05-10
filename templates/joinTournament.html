@@ -1,0 +1,116 @@
+<html>
+  <head>
+    <title>BrackeTracker - Home</title>
+    <link rel="stylesheet" type="text/css" href="main.css" />
+    <link rel="stylesheet" type="text/css" href="create.css" />
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" media="all" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="join.js"></script>
+
+  </head>
+
+  <body>
+    <div id="header">
+		<div id="menubar">
+			<div id="leftMenu" >
+				<div id="homeIcon" class="menubarIcon">
+					<a href="home.html"><img src="graphics/home.png" /></a>
+				</div>
+				<div id="friendsIcon" class="menubarIcon">
+					<a href="friends.html"><img src="graphics/friends.png" /></a>
+				</div>
+			</div>
+			<div id="centerMenu">
+				<div id="logo">
+					<a href="home.html"><img src="graphics/bracketrackerlogosmall.png" /></a>
+				</div>
+			</div>
+			<div id="rightMenu" >
+				<div id="profileIcon" class="menubarIcon">
+					<a href="profile.html"><img src="graphics/larryprofile.png" /></a>
+				</div>
+				<div id="settingsIcon" class="menubarIcon">
+					<a href="settings.html"><img src="graphics/settings.png" /></a>
+				</div>
+				
+				<div id="logoutIcon" class="menubarIcon">
+					<a href="home.html"><img src="graphics/logout.png" /></a>
+				</div>
+			</div>
+		</div>
+	</div>
+  
+    <div id="create">
+      <div id="left" class="panel">
+        <div class="title">Tournament Info</div>
+          <label for="name">Tournament Name*:</label>
+          <br />
+          <div id="name">Office Ping Pong</div>
+          <br />
+          <label for="scope">Tournament is:</label>
+          <br />
+          <div id="scope">Public</div>
+          <br />
+          <label for="description">Tournament Description:</label>
+          <div id="description">Come play in our little office ping pong tournament.  It'll be tons of fun.  Let's see who is the best.</div>
+          <label for='type'>Tournament Type*:</label>
+          <br />
+          <div id="type">Round Robin</div>
+          <br />
+          <div>Preview:</div>
+          <div id="preview"></div>
+          <br />
+          <div id="createStatus">Tournament Created</div>
+          <button id="joinBtn">Join Tournament</button>
+
+      </div>
+	  <div id="contentDivider"></div>
+      <div id="right" class="panel">
+        <div class='title'>Tournament Members</div>
+        <div class="members">
+          <table id="members">
+            <tr>
+              <td>Moe</td>
+              <td>(Manager)</td>
+            </tr>
+            <tr>
+              <td>Curly</td>
+            </tr>
+            <tr>
+              <td>Adam</td>
+            </tr>
+            <tr>
+              <td>Billy</td>
+            </tr>
+            <tr>
+              <td>Carl</td>
+            </tr>
+            <tr>
+              <td>Dave</td>
+            </tr>
+            <tr>
+              <td>Eric</td>
+              <td>(Invited)</td>
+            </tr>
+            <tr>
+              <td>Fred@bedrock.com</td>
+              <td>(Invited)</td>
+            </tr>
+            <tr>
+              <td>George@spacelysprockets.com</td>
+              <td>(Invited)</td>
+            </tr>
+            <tr>
+              <td>Harry@hogwarts.edu</td>
+              <td>(Invited)</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+  </body>
+</html>

@@ -1,0 +1,67 @@
+.invalid{
+  background-color:#444400 !important;
+}
+.box{
+  position:relative;
+  float:left;
+  background-color:rgba(21,21,21,0.2);
+}
+.valid {
+  background-color: rgba(255,203,3,0);
+}
+.valid:hover{
+  background-color: rgba(255,203,3,1) !important;
+}
+.box .content{
+  font-weight:bold;
+  text-align:center;
+  margin: 0 auto; 
+}
+.box .name{
+
+}
+.box .score{
+
+}
+.win{
+  background-color:#7DD46E;
+}
+.loss{
+  background-color:#C24444;
+}
+
+#scorePrompt #players{
+  float:left;
+  width:33%;
+  height:85%;
+}
+#scorePrompt #players #you{
+  width:100%;
+}
+#scorePrompt #players #opponent{
+  width:100%;
+}
+#scorePrompt #outcome{
+  float:left;
+  width:32%;
+  height:85%;
+}
+#scorePrompt #score{
+  float:left;
+  width:32%;
+  height:85%;
+}
+#scoreError{
+  visibility:hidden;
+  position:absolute;
+  width:90%;
+  height:10%;
+  color:red;
+  bottom:5;
+}
+.scoreInput{
+  width:50px;
+}
+.smallTitle{
+  text-decoration:underline;
+}

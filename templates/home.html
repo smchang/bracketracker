@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href={{url_for('static',filename="home.css")}} />
+  <script type="text/javascript" src={{url_for('static',filename="home.js")}}></script>
+{% endblock %}
+
+
+{% block content %}
+  <div id="passwordPrompt" title="Office Ping Pong">
+    This tournament is marked as private. Enter password to see tournament page.<br /><br />
+    Manager(s): Larry<br />
+    Password: <input id="password"></input>
+    <div id="promptError">Password you entered is incorrect</div>
+  </div>
+
+  <div id="contentBox">
+    <div id="content">
+      <div id="tournaments">
+        <div class="subheader">
+          Tournaments
+          <div id="searchIcon"></div>
+          <input id='search' type='text'></input>
+        </div>
+        <br>
+        <div id="yourTournaments">
+          <div id="yourTournamentsText">
+            Your Tournaments:
+          </div>
+          {% for k in your_tournaments.keys() %}
+          <a href='{{your_tournaments[k].type}}/{{your_tournaments[k].id}}' name="{{your_tournaments[k].name}}" class="listingLink">
+              <div class="tournament listing">
+                <div id="{{your_tournaments[k].icon}}" class="icon"></div>
+                {{ your_tournaments[k].name }} Tournament
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+        <div id="tournamentDivider"></div>
+        <br>
+        <div id="allTournaments"></div>
+        <a id="createLink" href={{url_for('create')}}>
+          <div>
+            <div class="icon"></div>
+            <div class="createLinkText">
+            Create Tournament
+            </div>
+          </div>
+        </a>
+      </div>
+      <div id="contentDivider"></div>
+      <div id="notifications">
+        <div class="subheader">
+          <div class="title">Notifications</div>
+        </div>
+        <br>
+        <br>
+        <div id="notes">
+          <div class="note listing">
+            <div class='title'>Game Completed</div>
+            You vs. Moe <br />
+            3:5
+            
+            <button class='button accept'>Accept</button>
+            <button class='button reject'>Reject</button>
+            
+          </div>
+          <div class="note listing">
+            <div class='title'>Tournament Invite</div>
+            You received an invitation to join the tournament:<br />
+            Foosball Tournament
+            <button class='button accept'>Accept</button>
+            <button class='button reject'>Reject</button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
