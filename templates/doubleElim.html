@@ -1,0 +1,10 @@
+{% extends 'tournament_base.html' %}
+
+{% block head %}
+  {{ super() }}
+    <link rel="stylesheet" type="text/css" href={{url_for('static',filename="doubleElim.css")}} />
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+{% endblock %}

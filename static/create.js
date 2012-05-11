@@ -15,7 +15,7 @@ $(document).ready(function(){
         }else if(type==='doubleElim'){
             $('#preview').removeClass();
             $('#preview').addClass('doubleElim');
-        }else if(type==='roundRobin'){
+        }else if(type==='staticRobin'){
             $('#preview').removeClass();
             $('#preview').addClass('grid');
         }else{
@@ -84,7 +84,6 @@ $(document).ready(function(){
             var p = $('#password').val().trim();
             var d = $('#description').val();
             var type = $('#type option:selected').val();
-//            if (type=='roundRobin'):
 
             console.log('name '+n);
             console.log('pwd '+p);

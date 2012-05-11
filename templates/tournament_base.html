@@ -1,49 +1,14 @@
 {% extends 'base.html' %}
 
+{% block title %}{{ tournament.name }}{% endblock %}
 {% block head %}
   {{ super() }}
-  <link rel="stylesheet" type="text/css" href={{url_for('static', filename="roundrobin.css")}} />
   <link rel="stylesheet" type="text/css" href={{url_for('static',filename="tournament.css")}} />
   <script type="text/javascript" src={{url_for('static',filename="tournament.js")}}></script>
-  <script type="text/javascript" src={{url_for('static',filename="roundrobin.js")}}></script>
 {% endblock %}
 
 {% block content %}
-    <div id="scorePrompt" title="Enter Outcome">
-      <div id="players">
-        <div class="smallTitle">
-          Players:
-        </div>
-        <div id="you">You</div>
-        vs.
-        <div id="opponent"></div>
-      </div>
-      <div id="outcome">
-        <div class="smallTitle">
-          Winner:
-        </div>
-        <form id="winner">
-          <input type="radio" name="winner" value="you"></input>
-          <br />
-          <br />
-          <input type="radio" name="winner" value="opp"></input>
-        </form>
-      </div>
-      <div id="score">
-        <div class="smallTitle">
-          Score:
-        </div>
-        <input type="text" id="yourScore" class="scoreInput"></input>
-        <br />
-        <br />
-        <input type="text" id="oppScore" class="scoreInput"></input>
-      </div>
-      <div id="scoreError">
-        Please Select a Winner
-      </div>
-    </div>
-  
-    <div id="contentBox">
+	<div id="contentBox">
     <div id="tournament">
       <div id="expandBar"><div class="icon"></div></div>
       <div id="adminbar">
@@ -78,7 +43,7 @@
             <button id="bootBtn" type="button">Boot Player</button>
           </div>
         </div>
+        <div id='bracket'></div>
     </div>
   </div>
-
-{% endblock %}
+  {% endblock %}

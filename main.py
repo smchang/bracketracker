@@ -46,15 +46,15 @@ def join():
 
 @app.route('/staticRobin/<name>', methods=['GET','POST'])
 def funfun(name):
-    return render_template('funfun.html')
+    return render_template('staticRobin.html',tournament = tournamentDB[session['id']]['your_tournaments'][name])
 
 @app.route('/singleElim/<name>', methods=['GET','POST'])
 def singleElim(name):
-    return render_template('chess.html')
+    return render_template('singleElim.html',tournament=tournamentDB[session['id']]['your_tournaments'][name])
 
 @app.route('/doubleElim/<name>', methods=['GET','POST'])
 def doubleElim(name):
-    return render_template('soccer.html')
+    return render_template('doubleElim.html', tournament=tournamentDB[session['id']]['your_tournaments'][name])
 
 @app.route('/roundrobin/<name>', methods=['GET','POST'])
 def roundrobin(name):
