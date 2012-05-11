@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    console.log('fjla;skdjf;laskdjfa');
     $('#tournamentScope').change(function(){
         if($("input:radio[name='scope']:checked").val()=='private'){
             $('#passwordDiv').css('display','block');
@@ -11,13 +10,16 @@ $(document).ready(function(){
     $('#type').change(function(){
         var type = $('#type option:selected').val();
         if(type==='singleElim'){
-            $('#preview').css('background','url(graphics/singleElim.png) no-repeat');
+            $('#preview').removeClass();
+            $('#preview').addClass('singleElim');
         }else if(type==='doubleElim'){
-            $('#preview').css('background','url(graphics/doubleElim.png) no-repeat');
+            $('#preview').removeClass();
+            $('#preview').addClass('doubleElim');
         }else if(type==='roundRobin'){
-            $('#preview').css('background','url(graphics/grid.png) no-repeat');
+            $('#preview').removeClass();
+            $('#preview').addClass('grid');
         }else{
-            $('#preview').css('background','');
+            $('#preview').removeClass();
         }
         $('#preview').css('background-size','400px 300px');
     });
@@ -78,6 +80,17 @@ $(document).ready(function(){
                 $('#createStatus').text("Tournament Information Updated");
             });
             $('#left').append(updateBtn);
+            var n = $('#name').val().trim();
+            var p = $('#password').val().trim();
+            var d = $('#description').val();
+            var type = $('#type option:selected').val();
+//            if (type=='roundRobin'):
+
+            console.log('name '+n);
+            console.log('pwd '+p);
+            console.log('description '+d);
+            console.log('type '+type);
+            $.post('/create',{name:String(n),password:String(p),description:String(d),type:String(type)});
         }
     });
 

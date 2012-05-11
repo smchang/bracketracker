@@ -2,6 +2,10 @@ from flask import Flask, redirect, request, render_template, url_for, session, j
 from models import Member
 from models import Tournament
 import os
+import shelve
+import uuid
+
+tournamentDB = shelve.open('db/tournaments.dbm','w', writeback=True)
 
 app = Flask(__name__)
 app.secret_key = '\xe0e\xb1[\xae\xdb\xc6\xa6\xd5\xb0\xae\x87#\xeeM\xff\x17\xa7&9{-\xc7\x81'
@@ -10,18 +14,30 @@ app.secret_key = '\xe0e\xb1[\xae\xdb\xc6\xa6\xd5\xb0\xae\x87#\xeeM\xff\x17\xa7&9
 @app.route('/')
 def home():
     print session
-    if len(session.keys())==0:
+    if 'id' not in session.keys():
         print "is null session"
         seedSession()
     else:
         print "is not null session"
     print session
-    return render_template('home.html',your_tournaments=session['your_tournaments'])
+    print 'tournaments for home:', tournamentDB[session['id']]['your_tournaments']
+    return render_template('home.html',your_tournaments=tournamentDB[session['id']]['your_tournaments'])
 
 @app.route('/create', methods=['GET','POST'])
 def create():
+    print request.method
     if request.method == 'POST':
-        print "creating tournament", request.form['name'], request.form['password']
+        name = request.form['name']
+        pwd = request.form['password']
+        desc = request.form['description']
+        type = request.form['type']
+        print "creating tournament"
+        print "    ",name
+        print "    ",pwd
+        print "    ",desc
+        print "    ",type
+        newTournament = Tournament(name,name,type,desc)
+        tournamentDB[session['id']]['your_tournaments'][name] = newTournament
     return render_template('createTournament.html')
 
 @app.route('/join')
@@ -44,31 +60,25 @@ def doubleElim(name):
 def roundrobin(name):
     if request.method == 'POST':
         print "POSTING"
+        
         if 'promote' in request.form:
             p = request.form['promote']
             print "making admin:", p
-            if p in session['your_tournaments'][name].players:
-                session['your_tournaments'][name].players.remove(p)
-                session.modified = True
-            if p in session['your_tournaments'][name].booted:
-                session['your_tournaments'][name].booted.remove(p)
-                session.modified = True
-            session['your_tournaments'][name].admins.append(p)
-            session.modified = True
+            if p in tournamentDB[session['id']]['your_tournaments'][name].players:
+                tournamentDB[session['id']]['your_tournaments'][name].players.remove(p)
+            if p in tournamentDB[session['id']]['your_tournaments'][name].booted:
+                tournamentDB[session['id']]['your_tournaments'][name].booted.remove(p)
+            tournamentDB[session['id']]['your_tournaments'][name].admins.append(p)
         elif 'demote' in request.form:
             d = request.form['demote']
             print "booting:",d
-            if d in session['your_tournaments'][name].players:
-                session['your_tournaments'][name].players.remove(d)
-                session.modified = True
-            if d in session['your_tournaments'][name].admins:
-                session['your_tournaments'][name].admins.remove(d)
-                session.modified = True
-            session['your_tournaments'][name].booted.append(d)
-            session.modified = True
+            if d in tournamentDB[session['id']]['your_tournaments'][name].players:
+                tournamentDB[session['id']]['your_tournaments'][name].players.remove(d)
+            if d in tournamentDB[session['id']]['your_tournaments'][name].admins:
+                tournamentDB[session['id']]['your_tournaments'][name].admins.remove(d)
+            tournamentDB[session['id']]['your_tournaments'][name].booted.append(d)
 
-
-    return render_template('roundrobin.html', tournament=session['your_tournaments'][name])
+    return render_template('roundrobin.html', tournament=tournamentDB[session['id']]['your_tournaments'][name])
 
 @app.route('/friends')
 def friends():
@@ -76,15 +86,18 @@ def friends():
 #using settings page as a site reset - clears session variable
 @app.route('/settings')
 def settings():
-    for k in session.keys():
-        session.pop(k)
+    session.pop('id')
     return render_template('comingSoon.html', page="Settings")
 @app.route('/profile')
 def profile():
     return render_template('comingSoon.html', page="Profile")
 
 def seedSession():
-    session['your_tournaments'] = {}
+    id = str(uuid.uuid4())
+    print id
+    session['id'] = id
+    tournamentDB[id] = {}
+
     print 'seeding'
 
     roundRobin = Tournament('roundRobin','Round Robin','roundrobin',"Description 1",
@@ -104,14 +117,14 @@ def seedSession():
     funfun = Tournament('funfun','FunFun','staticRobin',"FunFun Description",
                         players = ['Moe','Curly','Adam','Billy'],
                        icon="funfunIcon")
-    session['your_tournaments']['roundRobin'] = roundRobin
-    session['your_tournaments']['soccer'] = soccer
-    session['your_tournaments']['chess'] = chess
-    session['your_tournaments']['funfun'] = funfun
-#    session['your_tournaments'].append(roundRobin)
-#    session['your_tournaments'].append(soccer)
-#    session['your_tournaments'].append(chess)
-#    session['your_tournaments'].append(funfun)
+
+    tournamentDB[id]['your_tournaments'] = {}
+    tournamentDB[id]['your_tournaments']['roundRobin'] = roundRobin
+    tournamentDB[id]['your_tournaments']['soccer'] = soccer
+    tournamentDB[id]['your_tournaments']['chess'] = chess
+    tournamentDB[id]['your_tournaments']['funfun'] = funfun
+    print "done seeding", tournamentDB[id]
+
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT',5000))

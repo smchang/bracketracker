@@ -84,6 +84,17 @@ margin-left: 10px;
   background-size:400px 300px;
 }
 
+.singleElim{
+  background: url('graphics/singleElim.png') no-repeat;
+}
+.doubleElim{
+  background: url('graphics/doubleElim.png') no-repeat;
+}
+.grid{
+  background: url('graphics/grid.png') no-repeat;
+}
+
+
 .members{
   margin-left: 0px;
   margin-right: 10px;
