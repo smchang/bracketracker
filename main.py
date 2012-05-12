@@ -1,6 +1,7 @@
 from flask import Flask, redirect, request, render_template, url_for, session, jsonify
 from models import Member
 from models import Tournament
+from models import Notification
 import os
 import shelve
 import uuid
@@ -21,7 +22,8 @@ def home():
         print "is not null session"
     print session
     print 'tournaments for home:', tournamentDB[session['id']]['your_tournaments']
-    return render_template('home.html',your_tournaments=tournamentDB[session['id']]['your_tournaments'])
+    return render_template('home.html',your_tournaments=tournamentDB[session['id']]['your_tournaments'],
+                          notifications = tournamentDB[session['id']]['notifications'])
 
 @app.route('/create', methods=['GET','POST'])
 def create():
@@ -107,6 +109,20 @@ def settings():
 def profile():
     return render_template('comingSoon.html', page="Profile")
 
+@app.route('/removeNotification',methods=['POST'])
+def removeNotification():
+    name = request.form['title']
+    print "removing notification", name
+    notification = tournamentDB[session['id']]['notifications'].pop(name)
+    if notification.tournament is None:
+        print "notification is not tournament"
+    else:
+        tournamentDB[session['id']]['your_tournaments'][notification.tournament.id] = notification.tournament
+        print "notification is tournament"
+
+#    return redirect(url_for('create'))
+    return jsonify(msg="removed notification")
+
 def seedSession():
     id = str(uuid.uuid4())
     print id
@@ -133,11 +149,21 @@ def seedSession():
                         players = ['Moe','Curly','Adam','Billy'],
                        icon="funfunIcon")
 
+    foosball = Tournament('foosball','Foosball','staticRobin',"Just a small foosball tournament between friends",
+                          admins=['Jeff'],
+                          players=['Joe','James','Jake','Jared'])
+    scoreNotification = Notification('Game Completed','You vs. Moe','3:5')
+    invite = Notification('Tournament Invite','You received an invitation to join the tournament:','Foosball\
+                          Tournament',tournament=foosball)
+
     tournamentDB[id]['your_tournaments'] = {}
     tournamentDB[id]['your_tournaments']['roundRobin'] = roundRobin
     tournamentDB[id]['your_tournaments']['soccer'] = soccer
     tournamentDB[id]['your_tournaments']['chess'] = chess
     tournamentDB[id]['your_tournaments']['funfun'] = funfun
+    tournamentDB[id]['notifications'] = {}
+    tournamentDB[id]['notifications'][scoreNotification.title] = scoreNotification
+    tournamentDB[id]['notifications'][invite.title] = invite
     print "done seeding", tournamentDB[id]
 
 

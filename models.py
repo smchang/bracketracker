@@ -22,6 +22,13 @@ class Tournament:
 #        return "<Tournament name:%s, type:%s, description:%s, members:%s, outcomes:%s, password:%s>, icon:%s"\
 #                % (self.name, self.type, self.description, self.members,self.outcomes,self.password, self.icon)
 
+class Notification:
+    def __init__(self, title, line1, line2, tournament=None):
+        self.title = title
+        self.line1 = line1
+        self.line2 = line2
+        self.tournament = tournament
+
 
 class Member:
     #name of member

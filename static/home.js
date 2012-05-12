@@ -40,6 +40,10 @@ var showTournament = function(name, global, isPrivate){
 }
 
 $(document).ready(function(){
+    if($('#notes').children().length==0){
+        $('#notes').text("No new notifications");
+    }
+
     var makeCloseable = function(listing){
         var closeButton = $('<button>');
         closeButton.addClass('closeButton');
@@ -61,6 +65,10 @@ $(document).ready(function(){
         if($('#notes').children().length==0){
             $('#notes').text("No new notifications");
         }
+        var title = $(this).parent().children('.title').text();
+        console.log($(this).parent().children('.title').text());
+        $.post('/removeNotification',{title:title});
+        location.reload();
     });
 
     $('#searchIcon').button();
