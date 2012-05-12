@@ -40,6 +40,21 @@ def create():
         tournamentDB[session['id']]['your_tournaments'][name] = newTournament
     return render_template('createTournament.html')
 
+@app.route('/addTournament',methods=['POST'])
+def add():
+    name = request.form['name']
+    pwd = request.form['password']
+    desc = request.form['description']
+    type = request.form['type']
+    print "adding tournament"
+    print "    ",name
+    print "    ",pwd
+    print "    ",desc
+    print "    ",type
+    newTournament = Tournament(name,name,type,desc)
+    tournamentDB[session['id']]['your_tournaments'][name] = newTournament
+    return jsonify(msg="added tournament")
+
 @app.route('/join')
 def join():
     return render_template('joinTournament.html')

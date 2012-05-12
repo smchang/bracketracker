@@ -1,8 +1,12 @@
 $(document).ready(function(){
-    $('#preview').css('background','url(graphics/grid.png)');
-    $('#preview').css('background-size','400px 300px');
     $('#joinBtn').click(function(){
-        $('<tr><td>You</td></tr>').insertBefore($($('#members').children()[0]).children()[6]);
+        $('<tr><td>Larry (You)</td></tr>').insertBefore($($('#members').children()[0]).children()[6]);
         $('#joinBtn').attr('disabled','true');
+
+        var n = $('#name').text().trim();
+        var p = "";
+        var d = $('#description').text();
+        var type = "staticRobin";
+        $.post('/addTournament',{name:String(n),password:String(p),description:String(d),type:type});
     });
 });

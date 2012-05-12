@@ -143,13 +143,13 @@ display: inline;
   height:75px;
   background-color:white;
 }
-#soccerIcon{
+#doubleElimIcon{
   background:url(graphics/doubleElim.png) no-repeat;
   background-size:75px 75px;
-}#chessIcon{
+}#singleElimIcon{
   background:url(graphics/singleElim.png) no-repeat;
   background-size:75px 75px;
-}#funfunIcon{
+}#staticRobinIcon{
   background:url(graphics/grid.png) no-repeat;
   background-size:75px 75px;
 }#roundrobinIcon{

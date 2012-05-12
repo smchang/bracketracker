@@ -32,7 +32,7 @@
           {% for k in your_tournaments.keys() %}
           <a href='{{your_tournaments[k].type}}/{{your_tournaments[k].id}}' name="{{your_tournaments[k].name}}" class="listingLink">
               <div class="tournament listing">
-                <div id="{{your_tournaments[k].icon}}" class="icon"></div>
+                <div id="{{your_tournaments[k].type}}Icon" class="icon"></div>
                 {{ your_tournaments[k].name }} Tournament
               </div>
             </a>
