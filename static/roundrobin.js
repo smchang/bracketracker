@@ -62,6 +62,12 @@ var addWin = function(wins, score1, score2){//takes a list of indexes
     $(wins).each(function(ind, elt){
         var s1 = score1[ind];
         var s2 = score2[ind];
+        if (isNaN(s1)){
+            s1 = '--';
+        }
+        if (isNaN(s2)){
+            s2 = '--';
+        }
         var xy = getXYfromIndex(elt);
         var eltOpp = getIndexFromXY(xy[1],xy[0]);
         var box = $('#bracket').children()[elt];
@@ -72,6 +78,8 @@ var addWin = function(wins, score1, score2){//takes a list of indexes
         $(boxOpp).addClass('loss');
         $(box).text(s1+':'+s2);
         $(boxOpp).text(s2+':'+s1);
+        console.log('adding'+elt+" "+s1+" "+s2);
+//        $.post($(location).attr('href'),{'win':elt,s1:s1,s2:s2});
     });
 }
 var addLoss = function(losses, score1, score2){//takes a list of indexes
@@ -82,15 +90,16 @@ var addLoss = function(losses, score1, score2){//takes a list of indexes
         var s2 = score2[ind];
         var xy = getXYfromIndex(elt);
         var eltOpp = getIndexFromXY(xy[1],xy[0]);
-        var box = $('#bracket').children()[elt];
-        var boxOpp = $('#bracket').children()[eltOpp];
-        $(box).removeClass('valid');
-        $(box).addClass("loss");
-        $(boxOpp).removeClass('valid');
-        $(boxOpp).addClass('win');
+//        var box = $('#bracket').children()[elt];
+//        var boxOpp = $('#bracket').children()[eltOpp];
+//        $(box).removeClass('valid');
+//        $(box).addClass("loss");
+//        $(boxOpp).removeClass('valid');
+//        $(boxOpp).addClass('win');
 
-        $(box).text(s1+':'+s2);
-        $(boxOpp).text(s2+':'+s1);
+//        $(box).text(s1+':'+s2);
+//        $(boxOpp).text(s2+':'+s1);
+        addWin(eltOpp,s2,s1);
     });
 }
 
@@ -135,19 +144,33 @@ $(document).ready(function(){
                   var checked = $('input:radio[name="winner"]:checked');
                   var yourScore = $('#yourScore').val()||'--';
                   var oppScore = $('#oppScore').val()||'--';
+                  yourScore = parseInt(yourScore);
+                  oppScore = parseInt(oppScore);
                   if(checked.length>0){
                       if(checked.val()=="you"){
                           if(updatingXY[0]<updatingXY[1]){
-                            addLoss(updatingIndex, yourScore, oppScore);
+                            var xy = getXYfromIndex(updatingIndex);
+                            var eltOpp = getIndexFromXY(xy[1],xy[0]);
+                            addWin(eltOpp,[oppScore],[yourScore]);
+                            $.post($(location).attr('href'),{win:eltOpp,s1:oppScore,s2:yourScore});
+
+//                            addLoss(updatingIndex, yourScore, oppScore);
                           }else{
-                            addWin(updatingIndex, yourScore, oppScore);
+                            addWin(updatingIndex, [yourScore], [oppScore]);
+                            $.post($(location).attr('href'),{win:updatingIndex,s1:yourScore,s2:oppScore});
                           }
                       }
                       else{
                           if(updatingXY[0]<updatingXY[1]){
-                            addWin(updatingIndex, yourScore, oppScore);
+                            addWin(updatingIndex, [yourScore], [oppScore]);
+                            $.post($(location).attr('href'),{win:updatingIndex,s1:yourScore,s2:oppScore});
                           }else{
-                              addLoss(updatingIndex, yourScore, oppScore);
+                            var xy = getXYfromIndex(updatingIndex);
+                            var eltOpp = getIndexFromXY(xy[1],xy[0]);
+                            addWin(eltOpp,[oppScore],[yourScore]);
+                            $.post($(location).attr('href'),{win:eltOpp,s1:oppScore,s2:yourScore});
+
+//                            addLoss(updatingIndex, yourScore, oppScore);
                           }
                       }
                   $(this).dialog('close');
@@ -193,7 +216,7 @@ $(document).ready(function(){
 var stringToArray = function(str){
     str = str.substr(1,str.length-2).split(',');
     for (var i=0; i<str.length; i++){
-        str[i] = parseInt(str[i]);
+            str[i] = parseInt(str[i]);
     }
     return str;
 }

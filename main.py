@@ -127,6 +127,24 @@ def roundrobin(name):
             if d in tournamentDB[session['id']]['your_tournaments'][name].admins:
                 tournamentDB[session['id']]['your_tournaments'][name].admins.remove(d)
             tournamentDB[session['id']]['your_tournaments'][name].booted.append(d)
+        elif 'win' in request.form:
+            print 'adding win to tournament'
+            win = request.form['win']
+            s1 = request.form['s1']
+            s2 = request.form['s2']
+            if s1 == 'NaN':
+                s1 = '--'
+            else:
+                s1 = int(s1)
+            if s2 == 'NaN':
+                s2 = '--'
+            else:
+                s2 = int(s2)
+            print win,s1,s2
+            tournamentDB[session['id']]['your_tournaments'][name].wins.append(int(win))
+            tournamentDB[session['id']]['your_tournaments'][name].s1.append(s1)
+            tournamentDB[session['id']]['your_tournaments'][name].s2.append(s2)
+            print tournamentDB[session['id']]['your_tournaments'][name].wins,tournamentDB[session['id']]['your_tournaments'][name].s1,tournamentDB[session['id']]['your_tournaments'][name].s2
 
     return render_template('roundrobin.html', tournament=tournamentDB[session['id']]['your_tournaments'][name])
 
@@ -163,6 +181,7 @@ def removeNotification():
         print "notification is tournament"
 #    return redirect(url_for('create'))
     return jsonify(msg="removed notification")
+
 
 def seedSession():
     id = str(uuid.uuid4())
