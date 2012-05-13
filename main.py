@@ -171,20 +171,21 @@ def seedSession():
                            icon="roundrobinIcon")
     soccer = Tournament('soccer','Soccer','doubleElim',"Soccer Description",
                         admins = ['Moe'],
-                        players = ['Curly','Billy','Carl'],
+                        players = ['Curly','Billy','Carl','Larry (You)'],
                         booted=['Fred'],
                        icon="soccerIcon")
     chess = Tournament('chess','Chess','singleElim',"Chess Description",
                        admins = ['Moe'],
-                       players = ['Dave', 'George'],
+                       players = ['Dave', 'George','Larry (You)'],
                       icon="chessIcon")
     funfun = Tournament('funfun','FunFun','staticRobin',"FunFun Description",
-                        players = ['Moe','Curly','Adam','Billy'],
+                        admins = ['Moe'],
+                        players = ['Larry (You)','Curly','Adam','Billy'],
                        icon="funfunIcon")
 
     foosball = Tournament('foosball','Foosball','staticRobin',"Just a small foosball tournament between friends",
                           admins=['Jeff'],
-                          players=['Joe','James','Jake','Jared'])
+                          players=['Joe','James','Larry (You)','Jake','Jared'])
     scoreNotification = Notification('Game Completed','You vs. Moe','3:5')
     invite = Notification('Tournament Invite','You received an invitation to join the tournament:','Foosball\
                           Tournament',tournament=foosball)
