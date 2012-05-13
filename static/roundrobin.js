@@ -57,9 +57,11 @@ var makeRoundRobin = function(w,h, numPlayers){
 }
 
 var addWin = function(wins, score1, score2){//takes a list of indexes
-    score1 = score1||'--';
-    score2 = score2||'--';
+//    score1 = score1||'--';
+//    score2 = score2||'--';
     $(wins).each(function(ind, elt){
+        var s1 = score1[ind];
+        var s2 = score2[ind];
         var xy = getXYfromIndex(elt);
         var eltOpp = getIndexFromXY(xy[1],xy[0]);
         var box = $('#bracket').children()[elt];
@@ -68,14 +70,16 @@ var addWin = function(wins, score1, score2){//takes a list of indexes
         $(box).addClass("win");
         $(boxOpp).removeClass('valid');
         $(boxOpp).addClass('loss');
-        $(box).text(score1+':'+score2);
-        $(boxOpp).text(score2+':'+score1);
+        $(box).text(s1+':'+s2);
+        $(boxOpp).text(s2+':'+s1);
     });
 }
 var addLoss = function(losses, score1, score2){//takes a list of indexes
-    score1 = score1||'--';
-    score2 = score2||'--';
+//    score1 = score1||'--';
+//    score2 = score2||'--';
     $(losses).each(function(ind, elt){
+        var s1 = score1[ind];
+        var s2 = score2[ind];
         var xy = getXYfromIndex(elt);
         var eltOpp = getIndexFromXY(xy[1],xy[0]);
         var box = $('#bracket').children()[elt];
@@ -85,8 +89,8 @@ var addLoss = function(losses, score1, score2){//takes a list of indexes
         $(boxOpp).removeClass('valid');
         $(boxOpp).addClass('win');
 
-        $(box).text(score1+':'+score2);
-        $(boxOpp).text(score2+':'+score1);
+        $(box).text(s1+':'+s2);
+        $(boxOpp).text(s2+':'+s1);
     });
 }
 
@@ -175,8 +179,21 @@ $(document).ready(function(){
         }
     });
 
-    addWin([21,25], 21, 4);
-    addLoss([62,37], 7, 21);
-
+//    addWin([21,25,44,55], [21, 21, 21, 21], [4,1,7,2]);
+    var wins = $('#wins').text();
+    var s1 = $('#s1').text();
+    var s2 = $('#s2').text();
+    wins = stringToArray(wins);
+    s1 = stringToArray(s1);
+    s2 = stringToArray(s2);
+    addWin(wins,s1,s2);
 
 });
+
+var stringToArray = function(str){
+    str = str.substr(1,str.length-2).split(',');
+    for (var i=0; i<str.length; i++){
+        str[i] = parseInt(str[i]);
+    }
+    return str;
+}

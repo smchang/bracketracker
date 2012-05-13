@@ -146,14 +146,21 @@ def profile():
 @app.route('/removeNotification',methods=['POST'])
 def removeNotification():
     name = request.form['title']
-    print "removing notification", name
+    type = request.form['type']
+#    print "removing notification", name
+#    print "button type",type
+    
     notification = tournamentDB[session['id']]['notifications'].pop(name)
-    if notification.tournament is None:
-        print "notification is not tournament"
+    if notification.type=="score":
+        print "notification is a score"
+        if type=="Accept":
+            tournamentDB[session['id']]['your_tournaments'][notification.tournament.id].wins.append(10)
+            tournamentDB[session['id']]['your_tournaments'][notification.tournament.id].s1.append(4)
+            tournamentDB[session['id']]['your_tournaments'][notification.tournament.id].s2.append(5)
+
     else:
         tournamentDB[session['id']]['your_tournaments'][notification.tournament.id] = notification.tournament
         print "notification is tournament"
-
 #    return redirect(url_for('create'))
     return jsonify(msg="removed notification")
 
@@ -169,7 +176,8 @@ def seedSession():
                             admins=['Larry'],
                             players = ['Moe','Curly','Adam','Billy','Carl','Dave'],
                             booted = ['Eric','Fred','George'],
-                           icon="roundrobinIcon")
+                           icon="roundrobinIcon",
+                           wins=[21,25,44,55],s1=[21,21,21,21],s2=[4,1,7,2])
     soccer = Tournament('soccer','Soccer','doubleElim',"Soccer Description",
                         admins = ['Moe'],
                         players = ['Curly','Billy','Carl','Larry (You)'],
@@ -187,9 +195,9 @@ def seedSession():
     foosball = Tournament('foosball','Foosball','staticRobin',"Just a small foosball tournament between friends",
                           admins=['Jeff'],
                           players=['Joe','James','Larry (You)','Jake','Jared'])
-    scoreNotification = Notification('Game Completed','You vs. Moe','3:5')
+    scoreNotification = Notification('Game Completed','Round Robin Tournament: You vs. Moe','3:5',type="score", tournament=roundRobin)
     invite = Notification('Tournament Invite','You received an invitation to join the tournament:','Foosball\
-                          Tournament',tournament=foosball)
+                          Tournament',type="invite",tournament=foosball)
 
     tournamentDB[id]['your_tournaments'] = {}
     tournamentDB[id]['your_tournaments']['roundRobin'] = roundRobin

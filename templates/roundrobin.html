@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% block title %}Round Robin{% endblock title %}
 {% block head %}
   {{ super() }}
   <link rel="stylesheet" type="text/css" href={{url_for('static', filename="roundrobin.css")}} />
@@ -10,6 +10,11 @@
 {% endblock %}
 
 {% block content %}
+  <div id="info">
+    <div id="wins">{{tournament.wins}}</div>
+    <div id="s1">{{tournament.s1}}</div>
+    <div id="s2">{{tournament.s2}}</div>
+  </div>
     <div id="scorePrompt" title="Enter Outcome">
       <div id="players">
         <div class="smallTitle">

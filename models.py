@@ -5,7 +5,8 @@ class Tournament:
     #description: text description of tournament
     #outcomes: a nxn length list (condensed matrix) of outcomes for tournament (assuming round robin)
     #password: tournament password (public if password is NULL, private otherwise)
-    def __init__(self, id, name, type, description="", admins=[], players=[], booted=[], invited=[], outcomes=[], password="", icon=""):
+    def __init__(self, id, name, type, description="", admins=[], players=[], booted=[], invited=[], outcomes=[],
+                 password="", icon="", wins=[], s1=[],s2=[]):
         self.id = id
         self.name = name
         self.type = type
@@ -16,6 +17,9 @@ class Tournament:
         self.outcomes = outcomes
         self.password = password
         self.icon = icon
+        self.wins = wins
+        self.s1 = s1
+        self.s2 = s2
 
     def __repr__(self):
         return "<Tournament name:%s>" % self.name
@@ -23,10 +27,11 @@ class Tournament:
                 % (self.name, self.type, self.description, self.members,self.outcomes,self.password, self.icon)
 
 class Notification:
-    def __init__(self, title, line1, line2, tournament=None):
+    def __init__(self, title, line1, line2, type="", tournament=None):
         self.title = title
         self.line1 = line1
         self.line2 = line2
+        self.type = type
         self.tournament = tournament
 
 

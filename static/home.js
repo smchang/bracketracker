@@ -62,13 +62,14 @@ $(document).ready(function(){
 
     $('.listing .button').click(function(){
         $(this).parent().remove();
+        var type = $(this).text();
         if($('#notes').children().length==0){
             $('#notes').text("No new notifications");
         }
         var title = $(this).parent().children('.title').text();
         console.log($(this).parent().children('.title').text());
-        $.post('/removeNotification',{title:title});
-        location.reload();
+        $.post('/removeNotification',{title:title, type:$(this).text()}, function(data){location.reload();console.log(data.msg)});
+//        location.reload();
     });
 
     $('#searchIcon').button();
