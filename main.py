@@ -63,6 +63,11 @@ def addMembersToTournament(tournament, members):
     members = filter (lambda a: a!='', members)
     print members
     tournamentDB[session['id']]['your_tournaments'][tournament].players = members
+def addAdminsToTournament(tournament, members):
+    members = members.split(',')
+    members = filter (lambda a: a!='', members)
+    print members
+    tournamentDB[session['id']]['your_tournaments'][tournament].admins = members
 
 @app.route('/addTournament',methods=['POST'])
 def addTournament():
@@ -70,13 +75,19 @@ def addTournament():
     pwd = request.form['password']
     desc = request.form['description']
     type = request.form['type']
+    admins = request.form['admins']
+    players = request.form['players']
     print "adding tournament"
     print "    ",name
     print "    ",pwd
     print "    ",desc
     print "    ",type
-    newTournament = Tournament(name,name,type,desc)
+    print "    ",admins
+    print "    ",players
+    newTournament = Tournament(name,name,type,desc, admins=admins, players=players)
     tournamentDB[session['id']]['your_tournaments'][name] = newTournament
+    addMembersToTournament(name, players)
+    addAdminsToTournament(name, admins)
     return jsonify(msg="added tournament")
 
 @app.route('/join')
@@ -159,12 +170,12 @@ def seedSession():
                             booted = ['Eric','Fred','George'],
                            icon="roundrobinIcon")
     soccer = Tournament('soccer','Soccer','doubleElim',"Soccer Description",
-                        admins = ['Larry'],
+                        admins = ['Moe'],
                         players = ['Curly','Billy','Carl'],
                         booted=['Fred'],
                        icon="soccerIcon")
     chess = Tournament('chess','Chess','singleElim',"Chess Description",
-                       admins = ['Larry'],
+                       admins = ['Moe'],
                        players = ['Dave', 'George'],
                       icon="chessIcon")
     funfun = Tournament('funfun','FunFun','staticRobin',"FunFun Description",

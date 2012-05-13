@@ -105,7 +105,6 @@ var getInvitedMembers = function(){
     $('#members tr').each(function(ind, val){
         var name = $($(val).children()[0]).html();
         var stat = $($(val).children()[1]).html();
-        console.log(name+stat);
         invitedMembers += name+',';
 
     });

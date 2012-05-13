@@ -24,23 +24,19 @@
             <br />
             <div id="adminList">
               {% for a in tournament.admins %}
-              <div class="player"><input type="checkbox" name="player" value="{{a}}" />{{a}}</div>
+              <div class="player">{{a}}</div>
               {% endfor %}
             </div>
             <div id="playerList">
               {% for p in tournament.players %}
-              <div class="player"><input type="checkbox" name="player" value="{{p}}" />{{p}}</div>
+              <div class="player">{{p}}</div>
               {% endfor %}
             </div>
             <div id="bootedList">
               {% for b in tournament.booted %}
-              <div class="player"><input type="checkbox" name="player" value="{{b}}" />{{b}}</div>
+              <div class="player">{{b}}</div>
               {% endfor %}
             </div>
-          </div>
-          <div id="buttons">
-            <button id="makeAdminBtn" type="button">Make Admin</button>
-            <button id="bootBtn" type="button">Boot Player</button>
           </div>
         </div>
         <div id='bracket'></div>
