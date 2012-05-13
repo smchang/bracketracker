@@ -89,7 +89,8 @@ $(document).ready(function(){
             console.log('pwd '+p);
             console.log('description '+d);
             console.log('type '+type);
-            $.post('/create',{name:String(n),password:String(p),description:String(d),type:String(type)});
+            var invitedMembers = getInvitedMembers();
+            $.post('/create',{name:String(n),password:String(p),description:String(d),type:String(type), members:String(invitedMembers), creator:"Larry"});
         }
     });
 
@@ -99,17 +100,37 @@ $(document).ready(function(){
 //    $('#createBtn').button();
 });
 
+var getInvitedMembers = function(){
+    var invitedMembers = "";
+    $('#members tr').each(function(ind, val){
+        var name = $($(val).children()[0]).html();
+        var stat = $($(val).children()[1]).html();
+        console.log(name+stat);
+        invitedMembers += name+',';
+
+    });
+
+    return invitedMembers;
+
+}
+
 var addMembers = function(users, emails){
     var usernames = users.split(',');
     var addresses = emails.split(',');
     $(usernames).each(function(ind, elt){
-        console.log(elt);
         if(elt)
             $('#members').append('<tr><td>'+elt+'</td><td>(invited)</td></tr>');
     });
     $(addresses).each(function(ind, elt){
-        console.log(elt);
         if(elt)
             $('#members').append('<tr><td>'+elt+'</td><td>(invited)</td></tr>');
     });
+
+    //try to add members to tournament members list by name
+    var name = $('#name').val().trim();
+    if (name != ""){
+        var invitedMembers = getInvitedMembers();
+        $.post('/addMembers/'+name, {members:invitedMembers});
+    }
+
 }

@@ -33,17 +33,39 @@ def create():
         pwd = request.form['password']
         desc = request.form['description']
         type = request.form['type']
+        members = request.form['members']
         print "creating tournament"
         print "    ",name
         print "    ",pwd
         print "    ",desc
         print "    ",type
+        print "    ",members
         newTournament = Tournament(name,name,type,desc)
         tournamentDB[session['id']]['your_tournaments'][name] = newTournament
+        addMembersToTournament(name, members)
     return render_template('createTournament.html')
 
+@app.route('/addMembers/<tournament>',methods=['POST'])
+def addMember(tournament):
+    print 'adding members'
+    if tournament in tournamentDB[session['id']]['your_tournaments'].keys():
+        print "adding members to tournament"
+        members = request.form['members']
+        addMembersToTournament(tournament, members)
+        print members
+    else:
+        print 'tournament does not exist'
+
+    return jsonify(msg='added members')
+
+def addMembersToTournament(tournament, members):
+    members = members.split(',')
+    members = filter (lambda a: a!='', members)
+    print members
+    tournamentDB[session['id']]['your_tournaments'][tournament].players = members
+
 @app.route('/addTournament',methods=['POST'])
-def add():
+def addTournament():
     name = request.form['name']
     pwd = request.form['password']
     desc = request.form['description']

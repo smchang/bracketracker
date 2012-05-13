@@ -19,8 +19,8 @@ class Tournament:
 
     def __repr__(self):
         return "<Tournament name:%s>" % self.name
-#        return "<Tournament name:%s, type:%s, description:%s, members:%s, outcomes:%s, password:%s>, icon:%s"\
-#                % (self.name, self.type, self.description, self.members,self.outcomes,self.password, self.icon)
+        return "<Tournament name:%s, type:%s, description:%s, members:%s, outcomes:%s, password:%s>, icon:%s"\
+                % (self.name, self.type, self.description, self.members,self.outcomes,self.password, self.icon)
 
 class Notification:
     def __init__(self, title, line1, line2, tournament=None):
