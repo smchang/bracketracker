@@ -136,7 +136,8 @@ def friends():
 #using settings page as a site reset - clears session variable
 @app.route('/settings')
 def settings():
-    session.pop('id')
+    if 'id' in session.keys():
+        session.pop('id')
     return render_template('comingSoon.html', page="Settings")
 @app.route('/profile')
 def profile():
