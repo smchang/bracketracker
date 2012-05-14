@@ -162,7 +162,7 @@ var getOppOppFromIndex = function(ind){
 
 $(document).ready(function(){
     $('.box').button();
-    makeRoundRobin(800,800,7);
+    makeRoundRobin(window.innerWidth*.5,window.innerHeight*.9,7);
     $('#scorePrompt').dialog({
         autoOpen: false,
         height: 300,
