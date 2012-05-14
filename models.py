@@ -6,7 +6,7 @@ class Tournament:
     #outcomes: a nxn length list (condensed matrix) of outcomes for tournament (assuming round robin)
     #password: tournament password (public if password is NULL, private otherwise)
     def __init__(self, id, name, type, description="", admins=[], players=[], booted=[], invited=[], outcomes=[],
-                 password="", icon="", wins=[], s1=[],s2=[]):
+                 password="", icon="", wins=[], s1=[],s2=[], state='active'):
         self.id = id
         self.name = name
         self.type = type
@@ -20,6 +20,7 @@ class Tournament:
         self.wins = wins
         self.s1 = s1
         self.s2 = s2
+        self.state = state
 
     def __repr__(self):
         return "<Tournament name:%s>" % self.name

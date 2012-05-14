@@ -40,6 +40,11 @@ var showTournament = function(name, global, isPrivate){
 }
 
 $(document).ready(function(){
+    $('.private').click(function(evt){
+        evt.preventDefault();
+        $('#passwordPrompt').dialog('open');
+    });
+
     if($('#notes').children().length==0){
         $('#notes').text("No new notifications");
     }
@@ -77,6 +82,7 @@ $(document).ready(function(){
         console.log(evt);
         if(evt.which==13){
             showSearchResults($('#search').val());
+//            $.get('/search/'+$('#search').val());
         }
     });
     $('#search').change(function(){
@@ -85,6 +91,7 @@ $(document).ready(function(){
     });
     $('#searchIcon').click(function(){
         showSearchResults($('#search').val());
+//        $.post('/search/'+$('#search').val());
     });
 
     $('#passwordPrompt').dialog({
@@ -106,54 +113,44 @@ $(document).ready(function(){
     }); 
     var showSearchResults = function(query){
         if(query.trim()===""){
-            $('#yourTournaments').text("Your Tournaments:");
-            $('#yourTournaments').children().remove();
-            $('#allTournaments').children().remove();
-            $(yourTournaments).each(function(ind, elt){
-                showTournament(elt,false, false);
+            $('#yourTournaments').children('.listingLink').each(function(ind, val){
+                if(name.indexOf(query.toLowerCase())!=-1){
+                    $(val).attr('style','');
+                }
             });
-            return;
+            $('#allTournaments').attr('style','display:none');
         }
-        $('#yourTournaments').children().remove();
-        $('#yourTournaments').text("Your Tournaments: ");
-        $(yourTournaments).each(function(ind, elt){
-            if(elt.toLowerCase()==query.toLowerCase() || elt.toLowerCase().indexOf(query.toLowerCase())!=-1){
-                showTournament(elt,false);
-            }
-        });
-        if($('#yourTournaments').children().length==0)    
-            $('#yourTournaments').append('No matches for "'+query+'" in your tournaments');
-        $('#allTournaments').text("All Tournaments:");
-        if(query.split(' ')[0].toLowerCase()==="office"){
-            $([1,2,3]).each(function(ind,elt){
-                var link = $('<a>');
-                link.attr('href','/join');
-                link.addClass("listingLink");
-                if(ind>0){
-                    link.addClass("private");
-                }
-                var tempListing = $('<div>');
-                tempListing.addClass('tournament');
-                tempListing.addClass('listing');
-                var tempInfo = $('<div>');
-                tempInfo.attr('id','officeIcon'+elt);
-                tempInfo.addClass("icon icon3");
-                tempListing.append(tempInfo);
-                tempListing.append('Office Ping Pong '+elt);
-                link.append(tempListing);
-               
-                $('#allTournaments').append(link);
-                if(ind>0){
-                    $('.private').click(function(evt){
-                        evt.preventDefault();
-                        $('#passwordPrompt').dialog('open');
-                    });
+        else{
+            var count = 0;
+            $('#yourTournaments').children('.listingLink').each(function(ind, val){
+                var name = $(val).attr('name').toLowerCase();
+                if(name.indexOf(query.toLowerCase())==-1){
+                    $(val).attr('style','display:none');
+                }else{
+                    $(val).attr('style','');
+                    count++;
                 }
             });
-        }else{
-            showTournament(query+' 1',true,true);
-            showTournament(query+' 2',true,true);
-            showTournament(query+' 3',true,true);
+            if (count==0){
+                $('#yourTournamentsText').text('Your Tournaments: No match for "'+query+'" found in your tournaments');
+            }
+
+            $('#allTournaments').attr('style','');
+            var allCount = 0;
+            $('#allTournaments').children('.listingLink').each(function(ind, val){
+                var name = $(val).attr('name').toLowerCase();
+                if(name.indexOf(query.toLowerCase())==-1){
+                    $(val).attr('style','display:none');
+                }else{
+                    $(val).attr('style','');
+                    allCount++;
+                }
+             });
+            if (allCount==0){
+                $('#allTournamentsText').text('All Tournaments: No match for "'+query+'" found');
+            }
+
+
         }
     }    
 });

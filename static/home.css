@@ -97,6 +97,10 @@
   background:url(graphics/search.png) no-repeat;
   background-size:25 25;
 }
+#searchForm{
+  float:right;
+  height:100%;
+}
 
 #yourTournaments{
 	margin-left: 0px;

@@ -11,7 +11,7 @@
 {% block content %}
   <div id="passwordPrompt" title="Office Ping Pong">
     This tournament is marked as private. Enter password to see tournament page.<br /><br />
-    Manager(s): Larry<br />
+    Manager(s): Moe<br />
     Password: <input id="password"></input>
     <div id="promptError">Password you entered is incorrect</div>
   </div>
@@ -21,8 +21,8 @@
       <div id="tournaments">
         <div class="subheader">
           Tournaments
-          <div id="searchIcon"></div>
-          <input id='search' type='text'></input>
+            <div id="searchIcon"></div>
+            <input id='search' type='text'></input>
         </div>
         <br>
         <div id="yourTournaments">
@@ -40,7 +40,24 @@
         </div>
         <div id="tournamentDivider"></div>
         <br>
-        <div id="allTournaments"></div>
+        <div id="allTournaments" style="display:none"> 
+          <div id="allTournamentsText">
+            All Tournaments:
+          </div>
+          {% for k in all_tournaments.keys() %}
+          {% if all_tournaments[k].password=='' %}
+            <a href='/join' name="{{all_tournaments[k].name}}" class="listingLink">
+          {% endif %}
+          {% if all_tournaments[k].password != "" %}
+              <a href='/join' name="{{all_tournaments[k].name}}" class="listingLink private">
+          {% endif %}
+              <div class="tournament listing">
+                <div id="{{all_tournaments[k].type}}Icon" class="icon"></div>
+                {{ all_tournaments[k].name }} Tournament
+              </div>
+            </a>
+          {% endfor %} 
+        </div>
         <a id="createLink" href={{url_for('create')}}>
           <div>
             <div class="icon"></div>

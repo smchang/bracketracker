@@ -23,7 +23,8 @@ def home():
     print session
     print 'tournaments for home:', tournamentDB[session['id']]['your_tournaments']
     return render_template('home.html',your_tournaments=tournamentDB[session['id']]['your_tournaments'],
-                          notifications = tournamentDB[session['id']]['notifications'])
+                          notifications = tournamentDB[session['id']]['notifications'],
+                          all_tournaments=tournamentDB[session['id']]['all_tournaments'])
 
 @app.route('/create', methods=['GET','POST'])
 def create():
@@ -166,7 +167,6 @@ def removeNotification():
     name = request.form['title']
     type = request.form['type']
 #    print "removing notification", name
-#    print "button type",type
     
     notification = tournamentDB[session['id']]['notifications'].pop(name)
     if notification.type=="score":
@@ -179,7 +179,6 @@ def removeNotification():
     else:
         tournamentDB[session['id']]['your_tournaments'][notification.tournament.id] = notification.tournament
         print "notification is tournament"
-#    return redirect(url_for('create'))
     return jsonify(msg="removed notification")
 
 
@@ -196,24 +195,40 @@ def seedSession():
                             players = ['Moe','Curly','Adam','Billy','Carl','Dave'],
                             booted = ['Eric','Fred','George'],
                            icon="roundrobinIcon",
-                           wins=[21,25,44,55],s1=[21,21,21,21],s2=[4,1,7,2])
+                           wins=[21,25,44,55],s1=[21,21,21,21],s2=[4,1,7,2],
+                           state='active')
     soccer = Tournament('soccer','Soccer','doubleElim',"Soccer Description",
                         admins = ['Moe'],
                         players = ['Curly','Billy','Carl','Larry (You)'],
                         booted=['Fred'],
-                       icon="soccerIcon")
+                       icon="soccerIcon",
+                       state='active')
     chess = Tournament('chess','Chess','singleElim',"Chess Description",
                        admins = ['Moe'],
                        players = ['Dave', 'George','Larry (You)'],
-                      icon="chessIcon")
+                      icon="chessIcon",
+                      state='active')
     funfun = Tournament('funfun','FunFun','staticRobin',"FunFun Description",
                         admins = ['Moe'],
                         players = ['Larry (You)','Curly','Adam','Billy'],
-                       icon="funfunIcon")
+                       icon="funfunIcon",
+                       state='active')
+
+    pingPong = Tournament('pingPong','Office Ping Pong', 'staticRobin',"Come play in our little office ping pong\
+                          tournament. It'll be lots of fun. Let's see who's the best.",
+                          admins=['Moe'],
+                          players=['Curly','Adam','Billy','Carl','Dave'],
+                          invited=['Eric','Fred@bedrock.com','George@spacelysprockets.com','Harry@hogwarts.edu'],
+                          state='join')
+    pingPong2 = Tournament('pingPong2','MIT Ping Pong','staticRobin',description="No description",\
+                           admins=['President Hockfield'],password="password123",state='join')
+    basketball = Tournament('basketball','IM Basketball','singleElim',description="We pretend we can ball",\
+                            admins=['The Committee'], password="password321",state='join')
 
     foosball = Tournament('foosball','Foosball','staticRobin',"Just a small foosball tournament between friends",
                           admins=['Jeff'],
-                          players=['Joe','James','Larry (You)','Jake','Jared'])
+                          players=['Joe','James','Larry (You)','Jake','Jared'],
+                         state='active')
     scoreNotification = Notification('Game Completed','Round Robin Tournament: You vs. Moe','3:5',type="score", tournament=roundRobin)
     invite = Notification('Tournament Invite','You received an invitation to join the tournament:','Foosball\
                           Tournament',type="invite",tournament=foosball)
@@ -226,6 +241,11 @@ def seedSession():
     tournamentDB[id]['notifications'] = {}
     tournamentDB[id]['notifications'][scoreNotification.title] = scoreNotification
     tournamentDB[id]['notifications'][invite.title] = invite
+    tournamentDB[id]['all_tournaments'] = {}
+    tournamentDB[id]['all_tournaments']['pingPong'] = pingPong
+    tournamentDB[id]['all_tournaments']['pingPong2'] = pingPong2
+    tournamentDB[id]['all_tournaments']['basketball'] = basketball
+
     print "done seeding", tournamentDB[id]
 
 
