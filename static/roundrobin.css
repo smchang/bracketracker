@@ -24,10 +24,12 @@
 
 }
 .win{
-  background-color:#7DD46E;
+  background: url(graphics/winW.png) no-repeat;
+  background-size:100% 100%;
 }
 .loss{
-  background-color:#C24444;
+  background: url(graphics/lossL.png) no-repeat;
+  background-size:100% 100%;
 }
 
 #scorePrompt #players{

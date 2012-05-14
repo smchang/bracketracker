@@ -61,18 +61,22 @@
       <div id="description">Description: {{ tournament.description}}</div>
           <br>
 		  <div id="memberList">
-            Players:
+            Admins:
             <br />
             <div id="adminList">
               {% for a in tournament.admins %}
               <div class="player"><input type="checkbox" name="player" value="{{a}}" />{{a}}</div>
               {% endfor %}
             </div>
+			Other Players:
+            <br />
             <div id="playerList">
               {% for p in tournament.players %}
               <div class="player"><input type="checkbox" name="player" value="{{p}}" />{{p}}</div>
               {% endfor %}
             </div>
+			Booted Players:
+            <br />
             <div id="bootedList">
               {% for b in tournament.booted %}
               <div class="player"><input type="checkbox" name="player" value="{{b}}" />{{b}}</div>
