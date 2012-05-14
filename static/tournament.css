@@ -74,7 +74,7 @@ overflow: hidden;
 }
 #expandBar .icon{
   position:absolute;
-  left: 10;
+  left: 10px;
   top: 50%;
   width: 25px;
   height:25px;
@@ -89,7 +89,7 @@ overflow: hidden;
 #bar #icon{
   margin: auto;
   position:absolute;
-  right:0;
+  right: 0px;
   top: 50%;
   width:25px;
   height:25px;
