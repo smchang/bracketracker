@@ -89,6 +89,11 @@ def addTournament():
     tournamentDB[session['id']]['your_tournaments'][name] = newTournament
     addMembersToTournament(name, players)
     addAdminsToTournament(name, admins)
+    
+    if name=="Office Ping Pong":
+        print "joining office ping pong"
+        tournamentDB[session['id']]['all_tournaments'].pop('pingPong')
+
     return jsonify(msg="added tournament")
 
 @app.route('/join')
