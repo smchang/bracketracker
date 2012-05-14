@@ -22,7 +22,10 @@
 #create{
 color: #FFFFFF;
 	font-family: CenturyGothic;
-    height: 100%;
+	
+    top:0px;
+	bottom:0px;
+	
 	margin-left: auto;
 	margin-right: auto;
 	width: 90%;
@@ -31,7 +34,8 @@ color: #FFFFFF;
 #contentDivider{
   float:left;
   width:0.33%;
-  height:100%;
+  top:0px;
+	bottom:0px;
 }
 
 #create .panel{ 
