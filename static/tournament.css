@@ -118,8 +118,8 @@ overflow: hidden;
 #bracket{
   position:absolute;
   top:10px;
-  left:33%;
-  width:800px;
-  height:800px;
+  left:25%;
+  width:50%;
+  height:95%;
   margin:auto;
 }
