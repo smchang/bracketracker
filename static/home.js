@@ -133,7 +133,8 @@ $(document).ready(function(){
                 }
             });
             if (count==0){
-                $('#yourTournamentsText').text('Your Tournaments: No match for "'+query+'" found in your tournaments');
+                $('#yourTournamentsText').text('Your Tournaments:');
+               $('#yourTournamentsText').append(' \<br\/\>No match for "'+query+'" found in your tournaments');
             }
 
             $('#allTournaments').attr('style','');
@@ -148,7 +149,8 @@ $(document).ready(function(){
                 }
              });
             if (allCount==0){
-                $('#allTournamentsText').text('All Tournaments: No match for "'+query+'" found');
+                $('#allTournamentsText').text('All Tournaments:');
+               $('#allTournamentsText').append('\<br\/\>No match for "'+query+'" found');
             }
 
 
