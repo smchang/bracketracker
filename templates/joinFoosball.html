@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Join Tournament{% endblock %}
+{% block head %}
+  {{ super() }}
+    <link rel="stylesheet" type="text/css" href={{url_for('static',filename="create.css")}} />
+    <script type="text/javascript" src={{url_for('static',filename="join.js")}}></script>
+{% endblock head %}
+
+
+{% block content %} 
+	<div id="contentBox">
+    <div id="create">
+      <div id="left" class="panel">
+        <div class="title">Tournament Info</div>
+          <label for="name">Tournament Name:</label>
+          <br />
+          <div id="name">Foosball</div>
+          <br />
+          <label for="tournamentScope">Tournament is:</label>
+          <br />
+          <div id="scope">Private</div>
+          <br />
+          <label for="description">Tournament Description:</label>
+          <br />
+          <div id="description" name="description">Just a small Foosball tournament between friends</div>
+          <br />
+          <label for='type'>Tournament Type:</label>
+          <br />
+          <div id="type">Round Robin</div>
+          <br />
+		  <br />
+          <div>Preview:</div>
+          <div id="preview" class="grid"></div>
+          <br />
+          <div id="createStatus">Tournament Created</div>
+          <button id="joinBtn">Join Tournament</button> 
+
+      </div>
+	  <div id="contentDivider"></div>
+      <div id="right" class="panel">
+        <div class='title'>Tournament Members</div>
+        <div class="members">
+          <table id="members">
+            <tr>
+              <td>Jeff</td>
+              <td>(Manager)</td>
+            </tr>
+            <tr>
+              <td>Joe</td>
+            </tr>
+            <tr>
+              <td>James</td>
+            </tr>
+            <tr>
+              <td>Jake</td>
+            </tr>
+            <tr>
+              <td>Jared</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

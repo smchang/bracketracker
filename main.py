@@ -93,12 +93,18 @@ def addTournament():
     if name=="Office Ping Pong":
         print "joining office ping pong"
         tournamentDB[session['id']]['all_tournaments'].pop('pingPong')
+    if name=="Foosball":
+        tournamentDB[session['id']]['notifications'].pop('Tournament Invite')
 
     return jsonify(msg="added tournament")
 
 @app.route('/join')
 def join():
     return render_template('joinTournament.html')
+
+@app.route('/join/foosball')
+def join_foosball():
+    return render_template('joinFoosball.html')
 
 @app.route('/staticRobin/<name>', methods=['GET','POST'])
 def funfun(name):

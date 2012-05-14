@@ -75,15 +75,22 @@
         <br>
         <div id="notes">
           {% for n in notifications.keys() %}
-          <div class="note listing">
-            <div class='title'>{{notifications[n].title}}</div>
-            {{notifications[n].line1}}<br />
-            {{notifications[n].line2}}
-            
-            <button class='button accept'>Accept</button>
-            <button class='button reject'>Reject</button>
-            
-          </div>
+          {% if notifications[n].tournament.id=='roundRobin' %}
+          <a href="/roundrobin/roundRobin" class="listingLink">
+          {% endif %}
+          {% if notifications[n].tournament.id=='foosball' %}
+          <a href="/join/foosball" class="listingLink">
+            {% endif %} 
+
+            <div class="note listing">
+              <div class='title'>{{notifications[n].title}}</div>
+              {{notifications[n].line1}}<br />
+              {{notifications[n].line2}}
+              <button class='button accept'>Accept</button>
+              <button class='button reject'>Reject</button>
+              
+            </div>
+          </a>
           {% endfor %}
         </div>
       </div>

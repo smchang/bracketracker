@@ -65,7 +65,7 @@ $(document).ready(function(){
     
     $('#createLink').button();
 
-    $('.listing .button').click(function(){
+    $('.listing .button').click(function(evt){
         $(this).parent().remove();
         var type = $(this).text();
         if($('#notes').children().length==0){
@@ -75,6 +75,9 @@ $(document).ready(function(){
         console.log($(this).parent().children('.title').text());
         $.post('/removeNotification',{title:title, type:$(this).text()}, function(data){location.reload();console.log(data.msg)});
 //        location.reload();
+        evt.stopPropagation(); 
+        evt.stopImmediatePropagation();
+        evt.preventDefault();
     });
 
     $('#searchIcon').button();
