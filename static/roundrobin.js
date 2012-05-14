@@ -1,3 +1,5 @@
+var names = ['Larry','Moe','Curly','Adam','Billy','Carl','Dave'];
+
 var updatingIndex;
 var updatingXY; 
 
@@ -106,10 +108,10 @@ var addLoss = function(losses, score1, score2){//takes a list of indexes
 //returns the name of your oppnent given you are Larry
 var getOppFromIndex = function(ind){
     var xy = getXYfromIndex(ind);
-    if(xy[0]==1){
+    if(xy[0] <xy[1]){
         switch(xy[1]){
-            case 2:
-                return "Moe";
+            case 1: return "You";
+            case 2: return "Moe";
             case 3: return "Curly";
             case 4: return "Adam";
             case 5: return "Billy";
@@ -117,10 +119,37 @@ var getOppFromIndex = function(ind){
             case 7: return "Dave";
             default: return "";
         }    
-    }else if(xy[1]==1){
+    }else if(xy[1]<xy[0]){
         switch(xy[0]){
-            case 2:
-                return "Moe";
+            case 1: return "You";
+            case 2: return "Moe";
+            case 3: return "Curly";
+            case 4: return "Adam";
+            case 5: return "Billy";
+            case 6: return "Carl";
+            case 7: return "Dave";
+            default: return "";
+        }
+    }
+}
+
+var getOppOppFromIndex = function(ind){
+    var xy = getXYfromIndex(ind);
+    if(xy[0] > xy[1]){
+        switch(xy[1]){
+            case 1: return "You";
+            case 2: return "Moe";
+            case 3: return "Curly";
+            case 4: return "Adam";
+            case 5: return "Billy";
+            case 6: return "Carl";
+            case 7: return "Dave";
+            default: return "";
+        }    
+    }else if(xy[1]>xy[0]){
+        switch(xy[0]){
+            case 1: return "You";
+            case 2: return "Moe";
             case 3: return "Curly";
             case 4: return "Adam";
             case 5: return "Billy";
@@ -197,10 +226,9 @@ $(document).ready(function(){
         updatingIndex = $('#bracket').children().index(this);
         updatingXY = getXYfromIndex(updatingIndex);
         console.log(updatingXY);
-        if(updatingXY[0]==1 || updatingXY[1]==1){
-            $('#opponent').text(getOppFromIndex(updatingIndex));
-            $('#scorePrompt').dialog('open');
-        }
+        $('#you').text(getOppOppFromIndex(updatingIndex));
+        $('#opponent').text(getOppFromIndex(updatingIndex));
+        $('#scorePrompt').dialog('open');
     });
 
 //    addWin([21,25,44,55], [21, 21, 21, 21], [4,1,7,2]);
