@@ -34,13 +34,13 @@ var makeRoundRobin = function(w,h, numPlayers){
         if(xy[0]==xy[1]){
             $(elt).addClass("invalid");//css('background-color','#444444');
         }
-        else if(ind==1) $($(elt).children()[0]).text("Larry");
-        else if(ind==2) $($(elt).children()[0]).text("Moe");
-        else if(ind==3) $($(elt).children()[0]).text("Curly");
-        else if(ind==4) $($(elt).children()[0]).text("Adam");
-        else if(ind==5) $($(elt).children()[0]).text("Billy");
-        else if(ind==6) $($(elt).children()[0]).text("Carl");
-        else if(ind==7) $($(elt).children()[0]).text("Dave");
+        else if(ind==1) $($(elt).children()[0]).text("vs Larry");
+        else if(ind==2) $($(elt).children()[0]).text("vs Moe");
+        else if(ind==3) $($(elt).children()[0]).text("vs Curly");
+        else if(ind==4) $($(elt).children()[0]).text("vs Adam");
+        else if(ind==5) $($(elt).children()[0]).text("vs Billy");
+        else if(ind==6) $($(elt).children()[0]).text("vs Carl");
+        else if(ind==7) $($(elt).children()[0]).text("vs Dave");
         else if(ind==8) $($(elt).children()[0]).text("Larry");
         else if(ind==16) $($(elt).children()[0]).text("Moe");
         else if(ind==24) $($(elt).children()[0]).text("Curly");
