@@ -113,6 +113,8 @@ $(document).ready(function(){
               } 
     }); 
     var showSearchResults = function(query){
+        $('#yourTournamentsText').text('Your Tournaments:');
+        $('#allTournamentsText').text('All Tournaments:');
         if(query.trim()===""){
             $('#yourTournaments').children('.listingLink').each(function(ind, val){
                 if(name.indexOf(query.toLowerCase())!=-1){
