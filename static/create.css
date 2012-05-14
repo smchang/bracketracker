@@ -34,8 +34,7 @@ color: #FFFFFF;
 #contentDivider{
   float:left;
   width:0.33%;
-  top:0px;
-	bottom:0px;
+  height: 100%;
 }
 
 #create .panel{ 
@@ -43,8 +42,7 @@ background-color: rgba(21,21,21,0.5);
   float: left;
   width: 49.33%;
   
-  top: 0px;
-  bottom: 0px;
+  height: 100%;
 }
 #create .panel *{ 
 margin-left: 10px;
