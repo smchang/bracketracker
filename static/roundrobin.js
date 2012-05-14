@@ -189,6 +189,7 @@ $(document).ready(function(){
                     check[0].checked=false;
                 }
                 $('#scoreError').css('visibility','hidden');
+                $('.scoreInput').val('');
               }
         });
     $('.box').click(function(){

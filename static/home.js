@@ -109,6 +109,7 @@ $(document).ready(function(){
         },
         close:function(){
                   $('#promptError').css('visibility','hidden');
+                  $('#password').val('');
               } 
     }); 
     var showSearchResults = function(query){
