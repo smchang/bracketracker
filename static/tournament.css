@@ -74,7 +74,7 @@ overflow: hidden;
 }
 #expandBar .icon{
   position:absolute;
-  left: 0;
+  left: 10;
   top: 50%;
   width: 25px;
   height:25px;
