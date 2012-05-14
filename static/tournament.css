@@ -75,10 +75,10 @@ overflow: hidden;
 #expandBar .icon{
   position:absolute;
   top: 50%;
-  width: 30px;
-  height:30px;
+  width: 25px;
+  height:25px;
   background: url(graphics/expandIcon.png) no-repeat;
-  background-size:35px 35px;
+  background-size:25px 25px;
 }
 #bar{
   float:right;
@@ -89,9 +89,9 @@ overflow: hidden;
   margin: auto;
   position:absolute;
   top: 50%;
-  width:30px;
-  height:30px;
-  background-size:35px 35px;
+  width:25px;
+  height:25px;
+  background-size:25px 25px;
 }
 #bar .expanded{
   background: url(graphics/unexpandIcon.png) no-repeat;
