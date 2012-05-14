@@ -22,7 +22,7 @@
 #create{
 color: #FFFFFF;
 	font-family: CenturyGothic;
-  height: 100%;
+    height: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	width: 90%;
@@ -38,8 +38,9 @@ color: #FFFFFF;
 background-color: rgba(21,21,21,0.5);
   float: left;
   width: 49.33%;
-  height: 100%;
-	
+  
+  top: 0px;
+  bottom: 0px;
 }
 #create .panel *{ 
 margin-left: 10px;
